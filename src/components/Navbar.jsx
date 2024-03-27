@@ -1,8 +1,21 @@
 import React from 'react'
 
-function Navbar() {
+function Navbar(props) {
   return (
-    <div style={{fontSize: 20, backgroundColor: 'red', padding: 20}}>Navbar</div>
+    <div style={{background: 'grey', padding: 10, color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <div>
+            <p>{props.title}</p>
+            <p>{props.isLogin ? 'Anda sedang login' : 'Anda belum login'}</p>
+        </div>
+        <div>
+            {!props.isLogin ? 
+                <button onClick={props.handleLogin}>Login</button>
+                :
+                <button onClick={props.handleLogout}>Logout</button>  
+            }
+
+        </div>
+    </div>
   )
 }
 

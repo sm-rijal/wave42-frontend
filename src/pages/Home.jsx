@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar';
 import ComLabel from '../components/atoms/ComLabel';
 import ComButton from '../components/atoms/ComButton';
+import Layout from '../components/Layout';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
 
@@ -11,9 +12,11 @@ function Home() {
     // const data
     const [isLogin, setIsLogin] = useState(false)
 
+
+
     // call api
     const getData = async() => {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+        const response = await fetch('https://jsonplaceholder.typicode.com/users')
         const resData = await response.json();
         console.log(resData);
         setData(resData)
@@ -37,14 +40,19 @@ function Home() {
         alert('Oke 2')
     }
 
+    const navigate = useNavigate();
+
+    const handleDetailUser = (id) => {
+        navigate(`detail-user/${id}`)
+    }
+
     useEffect(() => {
         getData();
     }, [])
 
     return (
-        <div>
-            <Navbar title = 'Home' isLogin={isLogin} handleLogin={() => setIsLogin(true)} handleLogout={() => setIsLogin(false)}  />
-
+        <Layout title='Home'>
+            {/* <Navbar title = 'Home' isLogin={isLogin} handleLogin={() => setIsLogin(true)} handleLogout={() => setIsLogin(false)}  /> */}
             <h2>{counter}</h2>
             {/* <button onClick={() => setCounter(counter + 1)}>Tambah</button> */}
             <button onClick={Tambah}>Tambah</button>
@@ -66,15 +74,17 @@ function Home() {
                 <ComButton title='Edit' handleClick = {handleClick2} />
             </div>
 
-
+            <h3>Daftar Users</h3>
             {data.map((item) => {
                 return(
-                    <div key={item.id}>
-                        <p>{item.title}</p>
+                    <div onClick={() => handleDetailUser(item.id)} key={item.id}>
+                        {/* <Link to={`/detail-user/${item.id}`}> */}
+                            <p>{item.name}</p>
+                        {/* </Link> */}
                     </div>
                 )
             })}
-        </div>
+        </Layout>
     )
 }
 

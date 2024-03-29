@@ -1,0 +1,22 @@
+/* .nav-left {
+
+} */
+
+.group-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu {
+    color: white;
+}
+
+.active {
+    color: orange;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+
+}

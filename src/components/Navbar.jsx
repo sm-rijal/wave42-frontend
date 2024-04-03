@@ -9,6 +9,7 @@ function Navbar(props) {
             <NavLink to='/about' className='menu'>About</NavLink>
             <NavLink to='/contact' className='menu'>Contact</NavLink>
             <NavLink to='/product' className='menu'>Products</NavLink>
+            <NavLink to='/charts' className='menu'>Charts</NavLink>
         </div>
         <div className='nav-right'>
           <p>{props.isLogin ? 'Anda sedang login' : 'Anda belum login'}</p>

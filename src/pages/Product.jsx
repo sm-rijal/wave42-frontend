@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import Layout from '../components/Layout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useGet } from '../hook/useFetch';
+import axios from 'axios';
 
 function Product() {
 
@@ -20,21 +21,38 @@ function Product() {
         getData()
     }, [])
 
+    // const [data, isLoading] = useGet('http://localhost:8000/products')
+
+    const navigate = useNavigate()
+
+    const handleDelete = async(id) => {
+        try {
+            await axios.delete(`http://localhost:8000/delete-product/${id}`)
+            alert('delete data berhasil')
+            getData()
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
   return (
-    <Layout title='About'>
+    <Layout title='Produk'>
     <div>
         <div>
             <Link to='/add-product'>Tambah</Link>
         </div>
         {
-            isLoading ? 'Loading . . . ' : data.length == 0 ? 'Data Kosong' :
+            isLoading ? 'Loading . . . ' : data?.length === 0 ? 'Data Kosong' :
 
-            data.map((item) => {
+            data && data.map((item) => {
                 return(
                     <div key={item.id}>
                         <p>Name: {item.name}</p>
                         <p>Price: {item.price}</p>
+                        <div style={{display: 'flex', gap: 10}}>
+                            <button onClick={() => navigate(`/edit-product/${item.id}`)}>Edit</button>
+                            <button onClick={() => handleDelete(item.id)}>Delete</button>
+                        </div>
                         <hr />
                     </div>
                 )

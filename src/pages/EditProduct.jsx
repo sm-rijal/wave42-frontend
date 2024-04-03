@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Layout from '../components/Layout'
 import axios from 'axios'
 import { useGet } from '../hook/useFetch'
 
-function AddProduct() {
+function EditProduct() {
 
     const [form, setForm] = useState({
         name: '',
@@ -12,8 +12,8 @@ function AddProduct() {
         store_id: 1,
     })
 
+    const ID = useParams().id
     const navigate = useNavigate()
-
     const handleChange = (e) => {
         setForm({
            ...form,
@@ -25,39 +25,45 @@ function AddProduct() {
         e.preventDefault();
         try {
             // post ke api
-            const response = await axios.post('http://localhost:8000/add-product', form)
+            const response = await axios.patch(`http://localhost:8000/edit-product/${ID}`, form)
             console.log(response); 
-            alert('tambah data berhasil')
+            alert('edit produk berhasil');
             navigate('/product')
 
-            
         } catch (error) {
             console.log(error);
+            alert('edit data gagal')
         }
     }
 
-    const [data] = useGet('http://localhost:8000/store') 
+    const [store] = useGet('http://localhost:8000/store') 
+    const [product] = useGet(`http://localhost:8000/detail-product/${ID}`)
+    
+    useEffect(() => {
+        setForm(product)
+        
+    }, [product])
 
   return (
-    <Layout title='Tambah Produk'>
+    <Layout title='Edit Produk'>
         <Link to='/product'>Back</Link>
 
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="">Nama</label>
-                <input type="text" value={form.name} name='name' onChange={handleChange}/>
+                <input type="text" value={form?.name} name='name' onChange={handleChange}/>
             </div>
             <div>
                 <label htmlFor="">Harga</label>
-                <input type="number" name='price' value={form.price} onChange={handleChange} />
+                <input type="number" name='price' value={form?.price} onChange={handleChange} />
             </div>
             <div>
                 <label htmlFor="">Store</label>
-                <select name="" id="">
+                <select name="store_id" value={form?.store_id} onChange={handleChange}>
                     <option value="">Pilih</option>
-                    {data?.map((item) => (
+                    {store?.map((item) => (
                         <>
-                            <option value={item.id} key={item.id}>{item.name}</option>
+                            <option value={item.id} key={item.id} defaultValue={item.id === product?.store_id}>{item.name}</option>
                         </>
                     ))}
                 </select>
@@ -72,4 +78,4 @@ function AddProduct() {
   )
 }
 
-export default AddProduct
+export default EditProduct

@@ -6,28 +6,28 @@ import axios from 'axios';
 
 function Product() {
 
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [data, setData] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
 
-    const getData = async() => {
-        try {
-            setIsLoading(true)
-            const response = await axios.get('http://localhost:8000/products')
-            console.log(response.data);
-            setData(response.data)
-            setIsLoading(false)
+    // const getData = async() => {
+    //     try {
+    //         setIsLoading(true)
+    //         const response = await axios.get('http://localhost:8000/products')
+    //         console.log(response.data);
+    //         setData(response.data)
+    //         setIsLoading(false)
             
-        } catch (error) {
-            console.log(error);
-            setIsLoading(false)
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error);
+    //         setIsLoading(false)
+    //     }
+    // }
 
-    useEffect(() => {
-        getData()
-    }, [])
+    // useEffect(() => {
+    //     getData()
+    // }, [])
 
-    // const [data, isLoading] = useGet('http://localhost:8000/products')
+    const [data, isLoading, getData] = useGet('http://localhost:8000/products')
 
     const navigate = useNavigate()
 

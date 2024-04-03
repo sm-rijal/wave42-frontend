@@ -20,7 +20,7 @@ export const useGet = (url) => {
 
     useEffect(() => {
         getData();
-    }, [url])
+    }, [])
 
-    return [data, isLoading]
+    return [data, isLoading, getData]
 }

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout from '../components/Layout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGet } from '../hook/useFetch';
 import axios from 'axios';
+import { ThemeContext } from '../context/ThemeContext';
 
 function Product() {
 
@@ -41,9 +42,13 @@ function Product() {
         }
     }
 
+    const {halo, handleKlik} = useContext(ThemeContext);
+
+
   return (
     <Layout title='Produk'>
     <div>
+        <button onClick={handleKlik}>klik {halo}</button>
         <div>
             <Link to='/add-product'>Tambah</Link>
         </div>
@@ -52,9 +57,10 @@ function Product() {
 
             data && data.map((item) => {
                 return(
-                    <div key={item.id}>
+                    <div key={item.id} style={{margin: 20}}>
                         <p>Name: {item.name}</p>
                         <p>Price: {item.price}</p>
+                        <img src={item.image} alt="image" style={{width: 250}} />
                         <div style={{display: 'flex', gap: 10}}>
                             <button onClick={() => navigate(`/edit-product/${item.id}`)}>Edit</button>
                             <button onClick={() => handleDelete(item.id)}>Delete</button>

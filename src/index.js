@@ -4,13 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Chart, registerables } from "chart.js";
+import { ThemeContextProvider } from './context/ThemeContext';
+import { AuthContextProvider } from './context/AuthContext';
 
 Chart.register(...registerables)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthContextProvider>
+      <ThemeContextProvider>
+        <App />
+      </ThemeContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

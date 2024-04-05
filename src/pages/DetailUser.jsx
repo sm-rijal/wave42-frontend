@@ -58,7 +58,7 @@ function DetailUser() {
         <p>{data.name}</p>
         <p>{data.username}</p>
         <p>{data.email}</p>
-        <p>{data.address.city}</p>
+        <p>{data.address?.city}</p>
     </Layout >
   )
 }

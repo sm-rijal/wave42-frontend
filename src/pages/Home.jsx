@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ComLabel from '../components/atoms/ComLabel';
 import ComButton from '../components/atoms/ComButton';
 import Layout from '../components/Layout';
 import { Link, useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 
 function Home() {
 
@@ -11,8 +12,6 @@ function Home() {
     const [data, setData] = useState([])
     // const data
     const [isLogin, setIsLogin] = useState(false)
-
-
 
     // call api
     const getData = async() => {

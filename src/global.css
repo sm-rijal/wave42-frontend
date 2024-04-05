@@ -2,6 +2,10 @@
 
 } */
 
+* {
+    margin: 0;
+}
+
 .group-menu {
     display: flex;
     gap: 20px;

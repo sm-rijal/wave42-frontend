@@ -8,14 +8,14 @@ function Layout({title, children}) {
 
   const mode = darkMode ? dark : light
   return (
-    <div style={{backgroundColor: mode.background, color: mode.color}}>
+    <div style={{backgroundColor: mode.background, color: mode.color, minHeight: '100vh'}}>
       <HelmetProvider>
         <Helmet>
           <title>{title}</title>
         </Helmet>
       </HelmetProvider>
         <Navbar />
-        <div>
+        <div style={{padding: 20}}>
             {children}
         </div>
     </div>

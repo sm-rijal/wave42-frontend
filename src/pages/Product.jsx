@@ -48,7 +48,6 @@ function Product() {
   return (
     <Layout title='Produk'>
     <div>
-        <button onClick={handleKlik}>klik {halo}</button>
         <div>
             <Link to='/add-product'>Tambah</Link>
         </div>
@@ -57,7 +56,7 @@ function Product() {
 
             data && data.map((item) => {
                 return(
-                    <div key={item.id} style={{margin: 20}}>
+                    <div key={item.id} style={{paddingBottom: 10}}>
                         <p>Name: {item.name}</p>
                         <p>Price: {item.price}</p>
                         <img src={item.image} alt="image" style={{width: 250}} />

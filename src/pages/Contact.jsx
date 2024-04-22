@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
-import { useNavigate } from 'react-router-dom'
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
 import axios from 'axios'
+import LoadingGif from '../loading.gif'
+import EmptyBox from '../empty-box.png'
+
 
 export function Contact() {
 
     const [refresh, setRefresh] = useState(false)
-    const navigate = useNavigate()
-
-    const handleClick = () => {
-        navigate('/')
-    }
-
+    // const navigate = useNavigate()
 
       // specify upload params and url for your files
     const getUploadParams = ({ meta }) => { return { url: 'https://httpbin.org/post' } }
@@ -69,7 +66,15 @@ export function About(){
         <Layout title='About'>
             <div>
                 {
-                    isLoading ? 'Loading . . . ' : data.length == 0 ? 'Data Kosong' :
+                    isLoading ? 
+                    <div className='icon-loading'>
+                        <img src={LoadingGif} alt="loading-icon" width={50} />
+                    </div>
+                    : data.length === 0 ? 
+                    <div className='icon-box-empty'>
+                        <img src={EmptyBox} alt="empty-icon" />
+                        <p className='fw-semibold' style={{color: '#ADA79F'}}>Data Kosong</p>
+                     </div> :
 
                     data.map((item) => {
                         return(

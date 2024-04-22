@@ -15,7 +15,7 @@ function Layout({title, children}) {
         </Helmet>
       </HelmetProvider>
         <Navbar />
-        <div style={{padding: 20}}>
+        <div>
             {children}
         </div>
     </div>

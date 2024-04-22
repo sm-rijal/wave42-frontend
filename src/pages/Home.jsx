@@ -1,17 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import ComLabel from '../components/atoms/ComLabel';
-import ComButton from '../components/atoms/ComButton';
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout';
-import { Link, useNavigate } from 'react-router-dom';
-import { ThemeContext } from '../context/ThemeContext';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
 
     const [counter, setCounter] = useState(0);
     // let counter = 0
     const [data, setData] = useState([])
-    // const data
-    const [isLogin, setIsLogin] = useState(false)
 
     // call api
     const getData = async() => {
@@ -32,13 +27,6 @@ function Home() {
         }
     }
 
-    function handleClick(){
-        alert('Oke')
-    }
-    function handleClick2(){
-        alert('Oke 2')
-    }
-
     const navigate = useNavigate();
 
     const handleDetailUser = (id) => {
@@ -51,27 +39,20 @@ function Home() {
 
     return (
         <Layout title='Home'>
-            {/* <Navbar title = 'Home' isLogin={isLogin} handleLogin={() => setIsLogin(true)} handleLogout={() => setIsLogin(false)}  /> */}
             <h2>{counter}</h2>
-            {/* <button onClick={() => setCounter(counter + 1)}>Tambah</button> */}
             <button onClick={Tambah}>Tambah</button>
             <button onClick={Kurang}>Kurang</button>
             <button onClick={() => setCounter(0)}>Reset</button>
-            {/* {
-                counter > 0 ?
-                <button onClick={Kurang}>Kurang</button>
-                : 
-                ''
-            } */}
 
-            <div>
+
+            {/* <div>
                 <ComLabel label='Name' type='text' placeholder='Masukan Nama' />
                 <ComButton title='Simpan' handleClick = {handleClick}  />
             </div>
             <div>
                 <ComLabel label='Phone' type='date' />
                 <ComButton title='Edit' handleClick = {handleClick2} />
-            </div>
+            </div> */}
 
             <h3>Daftar Users</h3>
             {data.map((item) => {

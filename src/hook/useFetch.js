@@ -20,6 +20,7 @@ export const useGet = (url) => {
 
     useEffect(() => {
         getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return [data, isLoading, getData]

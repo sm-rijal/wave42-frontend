@@ -27,13 +27,14 @@ function DetailUser() {
     // berjalan hanya 1 kali ketika masuk ke dalam pages component
     useEffect(() => {
         getData();
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // berjalan ketika counter ada update
     useEffect(() => {
         console.log('jalan didupdate');
         getData(); // ketika state counter berubah, maka getData diajalankan ulang 
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [counter]);
 
     useEffect(() => {

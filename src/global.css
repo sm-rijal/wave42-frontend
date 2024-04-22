@@ -16,11 +16,167 @@
 }
 
 .group-menu .active {
-    color: orange;
+    color: #FFAF45;
 }
 
 .nav-right {
     display: flex;
     gap: 20px;
 
+}
+
+.link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: #0d6efd;
+    width: max-content;
+    padding: 8px;
+    border-radius: 6px;
+    color: #FFFFFF;
+    text-decoration: none;
+    border: 1px solid #0d6efd;
+
+}
+.list-product .link-btn:hover {
+    background-color: #FFFFFF;
+    border: 1px solid #0d6efd;
+    color: #0d6efd;
+}
+
+.link-btn .icon-add {
+    font-size: 20px;    
+}
+
+.card-product {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.card-item {
+    padding: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 12px #00000026;
+    border-radius: 6px;
+    position: relative;
+}
+.card-item img {
+    width: 222px;
+    height: 222px;
+}
+
+.card-product .title {
+    font-size: 16px;
+    color: black;
+    margin: 0;
+}
+
+.card-product .price {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.card-product .box-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.card-product .icon-edit {
+    background-color: #E9C874;
+    padding: 5px;
+    border-radius: 50px;
+    color: #FBF8DD;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 25px;
+}
+.card-product .icon-delete {
+    background-color: #A34343;
+    padding: 5px;
+    border-radius: 50px;
+    color: #FBF8DD;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.icon-box-empty {
+    position: fixed;
+    text-align: center;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+}
+.icon-loading {
+    position: fixed;
+    text-align: center;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .list-product h4 {
+        text-align: center;
+    }
+    .card-product {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .card-product .icon-edit {
+        font-size: 30px;
+    }
+    .card-product .icon-delete {
+        font-size: 30px;
+    }
+    
+    .card-item img {
+        width: 270px;
+        height: 270px;
+    }
+
+    .card-product .title {
+        font-size: 20px;
+    }
+    
+    .card-product .price {
+        font-size: 20px;
+        font-weight: 600;
+        padding-bottom: 10px;
+    }
+
+    .list-product .container-btn-add {
+        display: flex;
+        justify-content: end;
+
+    }
+
+    .list-product .link-btn {
+        border-radius: 50px;
+        position: fixed;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        bottom: 0;
+        margin-bottom: -10px;
+        color: #FFFFFF;
+    }
+
+    .link-btn .link-title {
+        display: none;
+    }
+    .link-btn .icon-add {
+        font-size: 50px;
+    }
 }

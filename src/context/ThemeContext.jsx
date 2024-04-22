@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+
 const { createContext, useState } = require("react");
 
 
@@ -8,12 +10,12 @@ export const ThemeContextProvider = ({children}) => {
   const [dataTheme, setDataTheme] = useState({
     darkMode: false,
     light: {
-      color: 'black',
+      color: '#31363F',
       background: 'white'
     },
     dark: {
       color: 'white',
-      background: 'black'
+      background: '#31363F'
     } 
   });
 
@@ -26,6 +28,7 @@ export const ThemeContextProvider = ({children}) => {
 
   return (
     <ThemeContext.Provider value={{...dataTheme, handleToggleTheme}}>
+        <ToastContainer position="top-center" autoClose={3000} />
         {children}
     </ThemeContext.Provider>
   )

@@ -18,7 +18,6 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route element={<PrivateRoute />} >
-
           <Route path="/contact" element={<Contact />} />
           <Route path="/detail-user/:id" element={<DetailUser />} />
           <Route path="/about" element={<About />} />

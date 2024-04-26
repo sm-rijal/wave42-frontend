@@ -39,7 +39,7 @@ function Home() {
 
     return (
         <Layout title='Home'>
-            <h2>{counter}</h2>
+            <h2 data-testid='count-value'>{counter}</h2>
             <button onClick={Tambah}>Tambah</button>
             <button onClick={Kurang}>Kurang</button>
             <button onClick={() => setCounter(0)}>Reset</button>

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Navbar from './Navbar'
+import Navbar from './Header/Navbar'
 import { HelmetProvider, Helmet } from 'react-helmet-async'
 import { ThemeContext } from '../context/ThemeContext';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import axios from 'axios'
@@ -68,8 +68,10 @@ function AddProduct() {
                         <select name="store_id" id="store_id" className='form-select' value={form.store_id} onChange={handleChange} required>
                             <option value="">Pilih</option>
                             {data?.map((item) => (
-                            
+                                <>
                                     <option value={item.id} key={item.id}>{item.name}</option>
+                                </>
+                            
                             ))}
                         </select>
                     </div>

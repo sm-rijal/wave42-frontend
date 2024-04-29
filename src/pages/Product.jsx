@@ -11,7 +11,7 @@ import LoadingGif from '../loading.gif'
 import EmptyBox from '../empty-box.png'
 import { toast } from 'react-toastify';
 import { IoStorefrontSharp  } from "react-icons/io5";
-import {Button, Modal} from 'react-bootstrap';
+import ModalDelete from '../components/Modal/ModalDelete';
 
 function Product() {
 
@@ -19,15 +19,24 @@ function Product() {
     const handleShowAlert = () => setShow(true);
     const handleClose = () => setShow(false);
 
+    const [idProduct, setIdProduct] = useState()
+
     const [data, isLoading, getData] = useGet('http://localhost:8000/products')
+    console.log(data);
     const navigate = useNavigate()
 
-    const handleDelete = async(id) => {
+    const handleShowModalDelete =  (id) => {
+        setIdProduct(id)
+        handleShowAlert()
+    }
+
+    const handleDelete = async() => {
         try {
-            await axios.delete(`http://localhost:8000/delete-product/${id}`)
+            await axios.delete(`http://localhost:8000/delete-product/${idProduct}`)
             // alert('delete data berhasil')
             toast.success("Product berhasil dihapus!");
             getData()
+            handleClose()
         } catch (error) {
             console.log(error);
         }
@@ -69,33 +78,17 @@ function Product() {
                                     <div className='box-button'>
                                         <GrEdit className='icon-edit' onClick={() => navigate(`/edit-product/${item.id}`)} />
                                         {/* <HiTrash  className='icon-delete' onClick={() => handleDelete(item.id)} /> */}
-                                        <HiTrash  className='icon-delete' onClick={handleShowAlert} />
-
-                                        {/* Modal Delete */}
-                                        <Modal show={show} onHide={handleClose}>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Hapus Produk</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <p className='bg-danger p-3 rounded bg-opacity-25'>Apakah anda yakin?</p>
-                                            </Modal.Body>
-                                            <Modal.Footer>
-                                                <Button variant="secondary" onClick={handleClose}>
-                                                    Close
-                                                </Button>
-                                                <Button variant="primary" onClick={() => handleDelete(item.id)}>
-                                                    Delete
-                                                </Button>
-                                            </Modal.Footer>
-                                        </Modal>
+                                        <HiTrash  className='icon-delete' onClick={() => handleShowModalDelete(item.id)} />
+                                        
                                     </div>
                                 </div>
                             )
                         })
                     }
                 </div>
-            
             </div>
+            {/* Modal Delete Product */}
+            <ModalDelete show={show} handleClose={handleClose} handleDelete={handleDelete} title='Produk'/>
         </Layout>
     )
 }

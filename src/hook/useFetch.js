@@ -10,7 +10,7 @@ export const useGet = (url) => {
         try {
             setIsLoading(true)
             const response = await axios.get(url)
-            setData(response.data)
+            setData(response.data.data)
             setIsLoading(false)
         } catch (error) {
             console.log(error);

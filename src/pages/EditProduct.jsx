@@ -73,7 +73,6 @@ function EditProduct() {
                         <label htmlFor="store_id" className='form-label'>Store</label>
                         <select name="store_id" id="store_id" className='form-select' value={form.store_id} onChange={handleChange} required>
                             <option value="">Pilih</option>
-                            <option value="">Pilih</option>
                             {store?.map((item) => (                       
                                     <option value={item.id} key={item.id} defaultValue={item.id === product?.store_id}>{item.name}</option>
                             ))}
@@ -83,6 +82,10 @@ function EditProduct() {
                     <div>
                         <label htmlFor="image" className='form-label'>Upload Image</label>
                         <input type="file" name='image' id='image' className='form-control' onChange={handleChange} />
+                    </div>
+
+                    <div>
+                        <img src={product?.image} alt="" width={100} height={100} />
                     </div>
 
                     <div className='d-flex justify-content-end'>

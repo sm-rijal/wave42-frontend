@@ -106,7 +106,7 @@ function AddProduct() {
                     }
 
                     <div className='d-flex justify-content-end'>
-                        <button className='btn btn-primary' disabled={isLoading}>Simpan</button>
+                        <button className='btn btn-primary' disabled={isLoading}>{isLoading ? 'Loading' : 'Simpan'}</button>
                     </div>
                 </form>
             </div>

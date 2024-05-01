@@ -41,7 +41,7 @@ function EditProduct() {
 
         } catch (error) {
             console.log(error);
-            alert('edit data gagal')
+            toast.error(error.response?.data.message)
         }
     }
 

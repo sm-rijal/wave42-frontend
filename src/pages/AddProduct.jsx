@@ -14,15 +14,26 @@ function AddProduct() {
         store_id: '',
     })
 
+    const [previewImage, setPreviewImage] = useState() 
+    const [isLoading, setIsLoading] = useState(false) 
+
     const navigate = useNavigate()
 
     const handleChange = (e) => {
         setForm({
            ...form,
-        //    [e.target.name]: e.target.file ? e.target.files[0] : e.target.value => sebelumnya
            [e.target.name]: e.target.type === 'file' ? e.target.files[0] : e.target.value
         })
+
+        // console.log(e.target.files[0]);
+        if(e.target.type === 'file'){
+            const url = URL.createObjectURL(e.target.files[0]);
+            // console.log(url);
+            setPreviewImage(url)
+        }
     }
+
+
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -35,14 +46,20 @@ function AddProduct() {
             formDataProduct.append('image', form.image)
             formDataProduct.append('store_id', form.store_id)
 
+            setIsLoading(true)
             await axios.post('http://localhost:8000/add-product', formDataProduct)
             // console.log(response); 
             // alert('tambah data berhasil')
+            setIsLoading(false)
             toast.success("Produk berhasil ditambahkan!");
             navigate('/product')
             
         } catch (error) {
             console.log(error);
+            if(error.response){
+                toast.error(error.response.data.message);
+            }
+            setIsLoading(false)
         }
     }
 
@@ -80,9 +97,16 @@ function AddProduct() {
                         <label htmlFor="image" className='form-label'>Upload Image</label>
                         <input type="file" name='image' id='image' className='form-control' onChange={handleChange} required/>
                     </div>
+                    {previewImage ? 
+                        <div>
+                            <img src={previewImage} alt="" width={150} height={150} />
+                        </div>
+                        :
+                        ''
+                    }
 
                     <div className='d-flex justify-content-end'>
-                        <button className='btn btn-primary'>Simpan</button>
+                        <button className='btn btn-primary' disabled={isLoading}>Simpan</button>
                     </div>
                 </form>
             </div>

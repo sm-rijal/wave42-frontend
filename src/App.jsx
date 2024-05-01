@@ -8,7 +8,6 @@ import Login from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function App() {
   return (
     <Router>
@@ -25,6 +24,7 @@ function App() {
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/edit-product/:id" element={<EditProduct />} />
           <Route path="/charts" element={<Charts />} />
+
         </Route>
         
       </Routes>

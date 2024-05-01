@@ -28,7 +28,7 @@ export const ThemeContextProvider = ({children}) => {
 
   return (
     <ThemeContext.Provider value={{...dataTheme, handleToggleTheme}}>
-        <ToastContainer position="top-center" autoClose={3000} />
+        <ToastContainer position="top-center" autoClose={2000} />
         {children}
     </ThemeContext.Provider>
   )

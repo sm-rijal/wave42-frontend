@@ -25,3 +25,7 @@ export const useGet = (url) => {
 
     return [data, isLoading, getData]
 }
+
+
+// pCqVSNtt8lTUHjtIb50k
+// 2TSZe6U6RFHMitPhvvVbo5BUcga0VeDTncevMoDT

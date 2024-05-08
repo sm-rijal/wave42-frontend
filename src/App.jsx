@@ -7,9 +7,20 @@ import Charts from './pages/Charts';
 import Login from './pages/Login';
 import PrivateRoute from './components/PrivateRoute';
 import 'react-toastify/dist/ReactToastify.css';
-import Test from './pages/Test';
+import Register from './pages/Register';
+import { useVerifyToken } from './hook/useVerifyToken';
+import { useEffect } from 'react';
+import { useAuthContext } from './hook/useAuthContext';
 
 function App() {
+
+  const {verifyToken} = useVerifyToken()
+  const {user} = useAuthContext()
+
+  useEffect(() => {
+    verifyToken()
+  }, [])
+
   return (
     <Router>
       <Routes>
@@ -17,17 +28,19 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
 
-        <Route element={<PrivateRoute />} >
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/detail-user/:id" element={<DetailUser />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/edit-product/:id" element={<EditProduct />} />
-          <Route path="/charts" element={<Charts />} />
-          <Route path="/test" element={<Test />} />
+        {/* <Route element={<PrivateRoute />} > */}
+          {/* Private Route */}
+          <Route path="/contact" element={user ? <Contact /> : <Login />} />
+          <Route path="/detail-user/:id" element={user ? <DetailUser /> : <Login /> } />
+          <Route path="/about" element={user ? <About />: <Login />} />
+          <Route path="/product" element={user ?<Product />: <Login />} />
+          <Route path="/add-product" element={user ?<AddProduct />: <Login />} />
+          <Route path="/edit-product/:id" element={user ?<EditProduct />: <Login />} />
+          <Route path="/charts" element={user ?<Charts />: <Login />} />
 
-        </Route>
+          {/* Akhir Private Route */}
+
+        <Route path="/register" element={<Register />} />
         
       </Routes>
     </Router>

@@ -1,15 +1,24 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { ThemeContext } from '../../context/ThemeContext';
 import { AuthContext } from '../../context/AuthContext';
 
 import { IoMoon } from "react-icons/io5";
 import { ImSun } from "react-icons/im";
+import { useAuthContext } from '../../hook/useAuthContext';
 
 function Navbar(props) {
   const {darkMode, handleToggleTheme} = useContext(ThemeContext);
-  const {isLogin, handleLogin, handleLogout} = useContext(AuthContext);
+  // const {isLogin, handleLogin, handleLogout} = useContext(AuthContext);
   // console.log(isLogin);
+  const navigate = useNavigate()
+  const {user, dispatch} = useAuthContext()
+  
+  const handleLogout = () => {
+
+    dispatch({type: 'LOGOUT'})
+    navigate('/login')
+  }
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme={!darkMode ? 'dark' : '#e3f2fd'}>
@@ -23,7 +32,7 @@ function Navbar(props) {
             <li className="nav-item">
               <NavLink to='/' className='nav-link'>Home</NavLink>
             </li>
-            { isLogin ?
+            { user && 
               <>
                 <li className="nav-item">
                 <NavLink to='/about' className='nav-link'>About</NavLink>  
@@ -38,8 +47,13 @@ function Navbar(props) {
                   <NavLink to='/charts' className='nav-link'>Charts</NavLink>
                 </li>
               </>
-              : 
+            }
+
+            {!user &&
               <>
+                <li className="nav-item">
+                  <NavLink to='/register' className='nav-link'>Register</NavLink>
+                </li>
                 <li className="nav-item">
                   <NavLink to='/login' className='nav-link'>Login</NavLink>
                 </li>
@@ -55,10 +69,16 @@ function Navbar(props) {
             }
             <span className="d-flex align-items-center">
 
-              {!isLogin ? 
-                  <button className='btn btn-light btn-sm' onClick={handleLogin}>Login</button>
-                  :
+              {!user &&
+                <>
+                  <button className='btn btn-light btn-sm' onClick={() => navigate('/login')}>Login</button>
+                </> 
+              }
+              { user &&
+                <>
+                <span className='mx-3 text-info'>{user.name}</span>
                   <button className='btn btn-light btn-sm' onClick={handleLogout}>Logout</button>  
+                </>
               }
             </span>
 

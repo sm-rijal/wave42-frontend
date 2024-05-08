@@ -25,7 +25,7 @@ function AddProduct() {
            [e.target.name]: e.target.type === 'file' ? e.target.files[0] : e.target.value
         })
 
-        // console.log(e.target.files[0]);
+        console.log(e.target.files[0]);
         if(e.target.type === 'file'){
             const url = URL.createObjectURL(e.target.files[0]);
             // console.log(url);

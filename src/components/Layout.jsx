@@ -9,6 +9,7 @@ function Layout({title, children}) {
   const mode = darkMode ? dark : light
   return (
     <div style={{backgroundColor: mode.background, color: mode.color, minHeight: '100vh'}}>
+      
       <HelmetProvider>
         <Helmet>
           <title>{title}</title>

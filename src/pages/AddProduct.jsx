@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import axios from 'axios'
 import { useGet } from '../hook/useFetch'
 import { toast } from 'react-toastify';
+import api from '../utils/api'
 
 function AddProduct() {
 
@@ -25,8 +26,8 @@ function AddProduct() {
            [e.target.name]: e.target.type === 'file' ? e.target.files[0] : e.target.value
         })
 
-        console.log(e.target.files[0]);
         if(e.target.type === 'file'){
+            // console.log(e.target.files[0]);
             const url = URL.createObjectURL(e.target.files[0]);
             // console.log(url);
             setPreviewImage(url)
@@ -46,8 +47,17 @@ function AddProduct() {
             formDataProduct.append('image', form.image)
             formDataProduct.append('store_id', form.store_id)
 
+            const token = localStorage.getItem('accessToken')
+
+            const config = {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        
             setIsLoading(true)
-            await axios.post('http://localhost:8000/add-product', formDataProduct)
+            await api.post('/products', formDataProduct, config)
             // console.log(response); 
             // alert('tambah data berhasil')
             setIsLoading(false)
@@ -63,7 +73,7 @@ function AddProduct() {
         }
     }
 
-    const [data] = useGet('http://localhost:8000/store') 
+    const [data] = useGet('/store') 
 
   return (
     <Layout title='Tambah Produk'>
@@ -74,7 +84,7 @@ function AddProduct() {
                 <form className='d-flex flex-column gap-3' onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="name" className='form-label'>Nama</label>
-                        <input type="text" id='name' className='form-control' value={form.name} name='name' onChange={handleChange} required/>
+                        <input type="text" id='name' className='form-control' value={form.name} name='name' onChange={handleChange} />
                     </div>
                     <div>
                         <label htmlFor="price" className='form-label'>Harga</label>
@@ -84,10 +94,8 @@ function AddProduct() {
                         <label htmlFor="store_id" className='form-label'>Store</label>
                         <select name="store_id" id="store_id" className='form-select' value={form.store_id} onChange={handleChange} required>
                             <option value="">Pilih</option>
-                            {data?.map((item) => (
-                                <>
-                                    <option value={item.id} key={item.id}>{item.name}</option>
-                                </>
+                            {data?.map((item, index) => (
+                                <option value={item.id} key={item.id}>{item.name}</option>
                             
                             ))}
                         </select>

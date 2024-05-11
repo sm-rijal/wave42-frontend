@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGet } from '../hook/useFetch';
-import axios from 'axios';
+import api from '../utils/api';
 import toRupiah from '@develoka/angka-rupiah-js';
 import { GrEdit } from "react-icons/gr";
 import { HiTrash } from "react-icons/hi2";
@@ -21,8 +21,17 @@ function Product() {
 
     const [idProduct, setIdProduct] = useState()
 
-    const [data, isLoading, getData] = useGet('http://localhost:8000/products')
-    console.log(data);
+    const token = localStorage.getItem('accessToken')
+
+    const config = {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const [data, isLoading, getData] = useGet('/products', config)
+    // console.log(data);
     const navigate = useNavigate()
 
     const handleShowModalDelete =  (id) => {
@@ -32,7 +41,7 @@ function Product() {
 
     const handleDelete = async() => {
         try {
-            await axios.delete(`http://localhost:8000/delete-product/${idProduct}`)
+            await api.delete(`/products/${idProduct}`)
             // alert('delete data berhasil')
             toast.success("Product berhasil dihapus!");
             getData()

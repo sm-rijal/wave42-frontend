@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import axios from 'axios'
 import { useGet } from '../hook/useFetch'
 import { toast } from 'react-toastify'
+import api from '../utils/api'
 
 function EditProduct() {
 
@@ -33,7 +34,16 @@ function EditProduct() {
             formDataProduct.append('image', form.image)
             formDataProduct.append('store_id', form.store_id)
 
-            const response = await axios.patch(`http://localhost:8000/edit-product/${ID}`, formDataProduct)
+            const token = localStorage.getItem('accessToken')
+
+            const config = {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const response = await api.patch(`/products/${ID}`, formDataProduct, config)
             console.log(response); 
             // alert('edit produk berhasil');
             toast.success("Produk berhasil diubah!");
@@ -45,8 +55,8 @@ function EditProduct() {
         }
     }
 
-    const [store] = useGet('http://localhost:8000/store') 
-    const [product] = useGet(`http://localhost:8000/detail-product/${ID}`)
+    const [store] = useGet('/store') 
+    const [product] = useGet(`/products/${ID}`)
     
     useEffect(() => {
         setForm(!product ? form : product)

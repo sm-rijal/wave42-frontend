@@ -23,11 +23,6 @@ function Login() {
            [e.target.name]: e.target.value
         })
     }
-    
-    console.log('test',user);
-    if(user){
-      return <Navigate to='/' />
-    }
 
 
     const handleSubmit = async(e) => {
@@ -56,6 +51,14 @@ function Login() {
         }
     }
 
+    const handleLoginGoogle = () => {
+        window.open('http://localhost:8000/auth/google', '_self');
+    }
+
+    if(user){
+        return <Navigate to='/' />
+    }
+
   return (
     <Layout title='Login User'>
         <Link to='/product' className='m-2'>Back</Link>
@@ -72,7 +75,8 @@ function Login() {
                         <input type="password" id='password' className='form-control' value={form.password} name='password' onChange={handleChange} required/>
                     </div>
 
-                    <div className='d-flex justify-content-end'>
+                    <div className='d-flex justify-content-end gap-3'>
+                        <button type='button' className='btn btn-info' onClick={handleLoginGoogle}>Login Google</button>
                         <button className='btn btn-primary' disabled={isLoading}>{isLoading ? 'Loading' : 'Login'}</button>
                     </div>
                 </form>

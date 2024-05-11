@@ -18,22 +18,10 @@ export const authReducer = (state, action) => {
 }
 
 export const AuthContextProvider = ({children}) => {
-    // const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin'))
 
-    // const handleLogin = () => {
-    //     setIsLogin(true)
-    //     localStorage.setItem('isLogin', true)
-    // }
-
-    // const handleLogout = () => {
-    //     setIsLogin(false)
-    //     localStorage.removeItem('isLogin')
-    // }
 
     const [state, dispatch] = useReducer(authReducer)
-
-    console.log('contextAuth', state);
-
+    // console.log('contextAuth', state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch}}>

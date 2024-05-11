@@ -1,15 +1,14 @@
-import axios from "axios";
 import { useEffect, useState } from "react"
+import api from '../utils/api'
 
-
-export const useGet = (url) => {
+export const useGet = (endpoint, config) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     const getData = async() => {
         try {
             setIsLoading(true)
-            const response = await axios.get(url)
+            const response = await api.get(endpoint, config)
             setData(response.data.data)
             setIsLoading(false)
         } catch (error) {

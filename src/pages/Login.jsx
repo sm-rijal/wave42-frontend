@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import { useAuthContext } from '../hook/useAuthContext';
+import api from '../utils/api';
 
 function Login() {
 
@@ -31,7 +32,7 @@ function Login() {
         try {
 
             setIsLoading(true)
-            const response = await axios.post('http://localhost:8000/login', form)
+            const response = await api.post('/login', form)
             console.log(response); 
 
             dispatch({type: 'LOGIN', payload: response.data})

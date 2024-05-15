@@ -6,9 +6,16 @@ import { AuthContextProvider } from '../../context/AuthContext';
 import { ThemeContextProvider } from '../../context/ThemeContext';
 import Product from '../Product'
 
-jest.mock('axios', () => ({
-    delete: jest.fn()
-}))
+// jest.mock('axios', () => ({
+//     delete: jest.fn()
+// }))
+
+jest.mock('axios', () => {
+    return {
+        create: jest.fn(() => {
+        })
+    };
+});
 
 const MockProduct = () => {
     return (

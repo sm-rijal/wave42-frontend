@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import axios from 'axios'
 import { useGet } from '../hook/useFetch'
 import { toast } from 'react-toastify';
+import api from '../utils/api'
 
 function Register() {
 
@@ -32,7 +33,7 @@ function Register() {
         try {
 
             setIsLoading(true)
-            await axios.post('http://localhost:8000/register', form)
+            await api.post('/register', form)
             // console.log(response); 
             // alert('tambah data berhasil')
             setIsLoading(false)

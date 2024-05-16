@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const baseURL = 'http://103.161.184.70/';
+const baseURL = 'https://api-wave42.samsul-rijal.my.id/';
 
 const api = axios.create({
     baseURL,

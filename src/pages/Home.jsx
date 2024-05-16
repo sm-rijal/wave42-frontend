@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout';
 import { useNavigate } from 'react-router-dom';
+import api from '../utils/api';
+
 
 function Home() {
 
@@ -10,8 +12,11 @@ function Home() {
 
     // call api
     const getData = async() => {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users')
-        const resData = await response.json();
+        // const response = await fetch('https://jsonplaceholder.typicode.com/users')
+        // const resData = await response.json();
+        const response = await api.get('/users')
+        const resData = response.data.data
+        console.log(response);
         console.log(resData);
         setData(resData)
     }

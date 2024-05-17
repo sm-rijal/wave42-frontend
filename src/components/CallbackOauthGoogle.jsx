@@ -11,7 +11,7 @@ function CallbackOauthGoogle() {
             console.log('token', accessToken);
             if(accessToken){
                 localStorage.setItem('accessToken', accessToken)
-                window.open('http://localhost:3000/', '_self');
+                window.open('https://samsul-rijal.my.id/', '_self');
             } else {
                 toast.error('Login gagal');
             }

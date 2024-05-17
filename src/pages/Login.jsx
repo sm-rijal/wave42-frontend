@@ -53,7 +53,7 @@ function Login() {
     }
 
     const handleLoginGoogle = () => {
-        window.open('http://localhost:8000/auth/google', '_self');
+        window.open('https://api-wave42.samsul-rijal.my.id/auth/google', '_self');
     }
 
     if(user){
